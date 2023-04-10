@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Affichage du panier!{% endblock %}
+
+{% block body %}
+    {% set prixTotal = 0 %}
+    {% set nombre_article = 0 %}
+    {% for lignePanier in lignesPanier %}
+        {% set nombre_article = nombre_article + lignePanier.getQuantite() %}
+        {% set prixTotal = prixTotal + (lignePanier.getIdProduit().getPrixUnitaire() * lignePanier.getQuantite()) %}
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Nom du produit : {{ lignePanier.getIdProduit().getLibelle() }}</h5>
+                <p class="card-text">Prix du produit : {{ lignePanier.getIdProduit().getPrixUnitaire() | number_format(0, '.', ' ') }} €</p>
+                <p class="card-text">Quantité total commandé : {{ lignePanier.getQuantite() }}</p>
+            </div>
+            <a href="{{ path('app_panier_supprimer', {'produit': lignePanier.getIdProduit().getId(), 'panier': lignePanier.getIdPanier().getId}) }}" class="btn btn-secondary">Supprimer</a>
+        </div>
+    {% endfor %}
+    <div class="card">
+        <div class="card-body">
+            <h3 class="card-text">Prix total : {{ prixTotal | number_format(0, '.', ' ') }} €</h3>
+            <h5 class="card-text">Nombre d'article(s) : {{ nombre_article }}</h5>
+        </div>
+    </div>
+    <a href="{{path('app_panier_commander')}}" class="btn btn-primary">Commander</a>
+    <a href="{{path('app_panier_vider')}}" class="btn btn-secondary">Vider</a>
+{% endblock %}

@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Acceuil{% endblock %}
+
+{% block body %}
+{% if app.session.flashBag.has('success_inscription') %}
+    <div class="alert alert-success">
+        {{ app.session.flashBag.get('success_inscription')[0] }}
+    </div>
+{% endif %}
+{% if app.session.flashBag.has('deconnexion') %}
+    <div class="alert alert-success">
+        {{ app.session.flashBag.get('deconnexion')[0] }}
+    </div>
+{% endif %}
+{% for message in app.session.flashBag.get('info_add_admin_ok') %}
+    <div class="alert alert-success">{{ message }}</div>
+{% endfor %}
+{% for message in app.session.flashBag.get('service_message_generator') %}
+    <div class="alert alert-success">{{ message }}</div>
+{% endfor %}
+{% for message in app.session.flashBag.get('info_edit_ok') %}
+    <div class="alert alert-success">{{ message }}</div>
+{% endfor %}
+
+<h1>Site de e-commerce</h1>
+<p>Bienvenue sur le site de e-commerce</p>
+{% if app.user is null %}
+    <p>Vous êtes connecté en tant qu'anonyme</p>
+{% elseif app.user and app.user.getRoles()[0] == 'ROLE_USER'  %}
+    <p>Vous etes connecté en tant que client lambdas</p>
+{% elseif app.user and app.user.getRoles()[0] == 'ROLE_ADMIN'  %}
+    <p>Vous etes connecté en tant qu'administrateur</p>
+{% elseif app.user and app.user.getRoles()[0] == 'ROLE_SUPER_ADMIN'  %}
+    <p>Vous etes connecté en tant que super administrateur</p>
+{% endif %}
+{% endblock %}

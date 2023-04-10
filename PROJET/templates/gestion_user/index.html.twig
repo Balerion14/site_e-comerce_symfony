@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}GestionUser{% endblock %}
+
+{% block body %}
+    <h1>Gestion liste utilisateur</h1>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Nom</th>
+            <th>Prenom</th>
+            <th>Email</th>
+            <th>Password</th>
+            <th>Identifiant</th>
+            <th>Roles</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for user in listeUser %}
+            <tr>
+                <td>{{ user.getNom() }}</td>
+                <td>{{ user.getPrenom() }}</td>
+                <td>{{ user.getEmail() }}</td>
+                <td>{{ user.getPassword() }}</td>
+                
+                <td>{{ user.getUserIdentifier() }}</td>
+                <td>{{ user.getRoles() ? user.getRoles()|json_encode : '' }}</td>
+                <td>
+                    {% if user.getRoles()[0] =='ROLE_ADMIN' or user.getRoles()[0] == 'ROLE_USER' %}
+                        {% if user.getId() != app.user.getId() %}
+                            <a href="{{ path('app_gestion_user_suppression', {'id': user.getId}) }}" class="btn btn-danger">Supprimer</a>
+                        {% endif %}
+                    {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

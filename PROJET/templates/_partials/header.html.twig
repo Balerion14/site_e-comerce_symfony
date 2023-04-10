@@ -1,0 +1,9 @@
+{% if app.user %}
+    {% if app.user.getRoles[0] == 'ROLE_ADMIN' or app.user.getRoles[0] == 'ROLE_SUPER_ADMIN' %}
+        <img src="{{ asset('assets/image/header/vert_clair.jpg') }}" alt="admin" style="width: 100%; height: 10px" >
+    {% else %}
+        <img src="{{ asset('assets/image/header/vert_f.jpg') }}" alt="user" style="width: 100%; height: 10px">
+    {% endif %}
+{% else %}
+    <img src="{{ asset('assets/image/header/rouge_.jpg') }}" alt="anonyme" style="width: 100%; height: 10px">
+{% endif %}

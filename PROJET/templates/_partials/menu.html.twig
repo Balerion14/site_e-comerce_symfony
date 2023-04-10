@@ -1,0 +1,117 @@
+{% if app.user is null  %}
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="{{path('app_main') }}">Accueil</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                <li class="nava-item">
+                    <a class="nav-link" href="{{path('app_register')}}">M'inscrire</a>
+                </li>
+                <li class="nava-item">
+                    <a class="nav-link" href="{{path('app_login')}}">Me connecter</a>
+                </li>
+            </div>
+        </div>
+    </nav>
+{% endif %}
+{% if app.user and app.user.getRoles[0] == 'ROLE_USER' %}
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="{{path('app_main') }}">Accueil</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <a class="navbar-brand" href="{{path('app_products_liste_produits')}}">Produit(s)</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <a class="navbar-brand" href="{{path('app_panier_afficher')}}">Panier</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                <li class="nava-item">
+                    <a class="nav-link" href="{{path('form_controlleur_gestion_compte_user') }}">Mon compte</a>
+                </li>
+                <li class="nava-item">
+                    <a class="nav-link" href="{{path('app_logout') }}">Se deconnecter</a>
+                </li>
+            </div>
+        </div>
+    </nav>
+{% endif %}
+{% if app.user and app.user.getRoles[0] == 'ROLE_ADMIN' %}
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="{{path('app_main') }}">Accueil</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <a class="navbar-brand" href="{{path('app_products_liste_produits')}}">Produit(s)</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <a class="navbar-brand" href="{{path('app_panier_afficher')}}">Panier</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <a class="navbar-brand" href="{{path('form_controlleur_ajout_produit')}}">Ajout produit</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <a class="navbar-brand" href="https://fr.wikipedia.org/wiki/The_Truman_Show">The Truman Show</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                <li class="nava-item">
+                    <a class="nav-link" href="{{path('app_gestion_user_affichage') }}">Gestion utilisateur(s)</a>
+                </li>
+                
+                <li class="nava-item">
+                    <a class="nav-link" href="{{path('form_controlleur_gestion_compte_user') }}">Mon compte</a>
+                </li>
+
+                <li class="nava-item">
+                    <a class="nav-link" href="{{path('app_logout') }}">Se deconnecter</a>
+                </li>
+            </div>
+        </div>
+    </nav>
+{% endif %}
+{% if app.user and app.user.getRoles[0] == 'ROLE_SUPER_ADMIN' %}
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="{{path('app_main') }}">Accueil</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <a class="navbar-brand" href="{{path('form_controlleur_ajout_user_admin')}}">Ajout administrateur</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                <li class="nava-item">
+                    <a class="nav-link" href="{{path('form_controlleur_gestion_compte_user') }}">Mon compte</a>
+                </li>
+                
+                <li class="nava-item">
+                    <a class="nav-link" href="{{path('app_logout') }}">Se deconnecter</a>
+                </li>
+            </div>
+        </div>
+    </nav>
+{% endif %}

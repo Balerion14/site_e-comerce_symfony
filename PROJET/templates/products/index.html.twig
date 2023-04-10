@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Products!{% endblock %}
+
+{% block body %}
+    {% if app.session.flashBag.has('info_edit_ok') %}
+        <div class="alert alert-success">{{ app.session.flashBag.get('info_edit_ok')[0] }}</div>
+    {% endif %}
+    {% if app.session.flashBag.has('info_add_ok') %}
+        <div class="alert alert-success">{{ app.session.flashBag.get('info_add_ok')[0] }}</div>
+    {% endif %}
+    <main class="container">
+        <section class="row">
+            <div class="col-12">
+                <h1>Liste produits</h1>
+            </div>
+            <div class="col-12">
+                {% for produit in produits %}
+                    {% set idProduit = produit.getId() %}
+                    {% set quantite = 0 %}
+                    {% for lignePanier in lignesPanier %}
+                        {% if lignePanier.getIdProduit().getId() == idProduit %}
+                            {% set quantite = lignePanier.getQuantite() %}
+                        {% endif %}
+                    {% endfor %}
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ produit.getLibelle() }}</h5>
+                            <p class="card-text">Prix : {{ produit.getPrixUnitaire() | number_format(0, '.', ' ') }} €</p>
+                            {% if quantite > 0  or produit.getQuantiteStock() > 0 %}
+                                <form action="{{ path('app_panier_ajouter') }}" method="post">
+                                    <div class="form-group">
+                                        <label for="quantite">Quantité :</label>
+                                        <select class="form-control" id="quantite" name="quantite">
+                                            {% for i in (0-quantite)..(produit.getQuantiteStock()) %}
+                                                {% if i == 0 %}
+                                                    <option value="{{ i }}" selected>{{ i }}</option>
+                                                {% else %}
+                                                <option value="{{ i }}">{{ i}}</option>
+                                                {% endif %}
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                    <input type="hidden" name="id_produit" value="{{ produit.getId() }}">
+                                    <button type="submit" class="btn btn-primary">Modifier</button>
+                                </form>
+                            {% endif %}
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </section>
+    </main>
+{% endblock %}

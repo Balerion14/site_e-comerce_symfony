@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ajout_administrateur{% endblock %}
+
+{% block body %}
+    {% for message in app.session.flashBag.get('info_add_admin') %}
+    <div class="alert alert-success">{{ message }}</div>
+    {% endfor %}
+    <section class="container">
+        <div class="row">
+            <div class="col">
+                <h1>Ajout administrateur</h1>
+
+                {{ form_start(myform) }}
+                    <fieldset class="mb-3">
+                        <legend>Mon identité</legend>
+                        {{ form_row(myform.username) }}
+                        {{ form_row(myform.prenom) }}
+                        {{ form_row(myform.nom) }}
+                        {{ form_row(myform.email) }}
+                        {{ form_row(myform.date_naissance) }}
+                    </fieldset>
+
+                    {{ form_row(myform.plainPassword, {
+                        label: 'Password'
+                    }) }}
+                    {{ form_row(myform.RGPDConsent) }}
+                {{ form_end(myform) }}            
+            </div>
+        </div>
+    </section>
+
+{% endblock %}

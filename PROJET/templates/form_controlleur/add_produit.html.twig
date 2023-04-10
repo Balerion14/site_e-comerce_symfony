@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ajout produit{% endblock %}
+
+{% block body %}
+    {% for message in app.session.flashBag.get('info_add') %}
+    <div class="alert alert-success">{{ message }}</div>
+    {% endfor %}
+    <section class="container">
+        <div class="row">
+            <div class="col">
+                <h1>Informations produit</h1>
+
+                {{ form_start(myform) }}
+                    <fieldset class="mb-3">
+                        <legend>Informations</legend>
+                        {{ form_row(myform.libelle) }}
+                        {{ form_row(myform.prix_unitaire) }}
+                        {{ form_row(myform.quantite_stock) }}
+                    </fieldset>  
+                {{ form_end(myform) }}            
+            </div>
+        </div>
+    </section>
+{% endblock %}
